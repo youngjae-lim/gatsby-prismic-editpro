@@ -1,7 +1,7 @@
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 // import linkResolver from "./src/utils/linkResolver"
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
 export default {
   siteMetadata: {

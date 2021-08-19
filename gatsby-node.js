@@ -1,4 +1,5 @@
-import path from 'path'
+// import path from 'path'
+const path = require('path')
 
 async function makePages({ graphql, actions }) {
   // 1. Get a template for this page
