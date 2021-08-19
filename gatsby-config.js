@@ -1,4 +1,9 @@
-module.exports = {
+import dotenv from "dotenv"
+// import linkResolver from "./src/utils/linkResolver"
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+
+export default {
   siteMetadata: {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
@@ -6,7 +11,17 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `${process.env.GATSBY_PRISMIC_REPO_NAME}`,
+        // accessToken is needed for only private API
+        // accessToken: `${process.env.PRISMIC_ACCESS_TOKEN}`,
+        customTypesApiToken: `${process.env.PRISMIC_CUSTOM_TYPES_API_TOKEN}`,
+      },
+    },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

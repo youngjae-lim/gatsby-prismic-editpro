@@ -1,42 +1,95 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import * as React from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
+import styled from 'styled-components'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+export default function Header() {
+  const data = useStaticQuery(graphql`
+    query NavigationQuery {
+      navigation: prismicNavigation {
+        data {
+          branding
+          navigation_links {
+            label
+            link {
+              id
+              document {
+                ... on PrismicPage {
+                  uid
+                }
+                ... on PrismicContactPage {
+                  uid
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  const links = data.navigation.data.navigation_links
+  const branding = data.navigation.data.branding
+
+  return (
+    <HeaderStyle>
+      <Branding>
+        <Link to={`/`}>{branding}</Link>
+      </Branding>
+      <NavLinks>
+        {links.map(link => (
+          <LinkWrapper key={link.link.id}>
+            <Link to={`/${link.link.document.uid}`}>{link.label}</Link>
+          </LinkWrapper>
+        ))}
+      </NavLinks>
+    </HeaderStyle>
+  )
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+const HeaderStyle = styled.header`
+  display: flex;
+  background: black;
+  height: 66px;
+  padding: 0 16px;
+  box-sizing: border-box;
+`
 
-export default Header
+const Branding = styled.div`
+  color: orange;
+  font-weight: bold;
+  margin: auto 0;
+  font-size: 25px;
+
+  a {
+    text-decoration: none;
+    color: white;
+
+    &[aria-current='page'] {
+      color: orange;
+    }
+  }
+`
+
+const NavLinks = styled.div`
+  display: flex;
+  margin-left: auto;
+`
+
+const LinkWrapper = styled.div`
+  margin: auto 0;
+
+  a {
+    color: white;
+    padding: 0 16px;
+    text-decoration: none;
+    font-weight: bold;
+
+    &[aria-current='page'] {
+      color: orange;
+    }
+
+    &:hover {
+      color: orange;
+    }
+  }
+`

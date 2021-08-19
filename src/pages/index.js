@@ -1,29 +1,98 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from '../components/Layout'
+import SliceZone from '../components/SliceZone'
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </p>
-  </Layout>
-)
+export default function Index({ data }) {
+  const { body } = data.prismicHomepage.data
 
-export default IndexPage
+  return (
+    <Layout>
+      <SliceZone body={body} />
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query {
+    prismicHomepage {
+      data {
+        body {
+          ... on PrismicHomepageDataBodyHero {
+            id
+            slice_type
+            primary {
+              hero_content
+              hero_title {
+                raw
+                html
+                text
+              }
+              background_image {
+                url
+                gatsbyImageData
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyCallToActionGrid {
+            id
+            slice_type
+            primary {
+              section_title {
+                html
+                raw
+                text
+              }
+            }
+            items {
+              a_call_to_action_title {
+                html
+                raw
+                text
+              }
+              content {
+                html
+                raw
+                text
+              }
+              button_label
+              button_destination {
+                uid
+              }
+              featured_image {
+                url
+                gatsbyImageData
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyPriceList {
+            id
+            slice_type
+            primary {
+              title {
+                html
+                raw
+                text
+              }
+            }
+            items {
+              price_list_title {
+                html
+                raw
+                text
+              }
+              price_per_month
+              price_list_description {
+                html
+                raw
+                text
+              }
+              price_type
+            }
+          }
+        }
+      }
+    }
+  }
+`
