@@ -52,6 +52,10 @@ const HeaderStyle = styled.header`
   height: 66px;
   padding: 0 16px;
   box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
 `
 
 const Branding = styled.div`
