@@ -19,7 +19,6 @@ export default function Contact({ data }) {
           method='POST'
           data-netlify='true'
           action='/contact-success'
-          onSubmit={e => e.preventDefault()}
         >
           <input type='hidden' name='form-name' value='contact' />
           {formFields.map((field, index) => {
