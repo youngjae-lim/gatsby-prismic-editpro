@@ -27,6 +27,7 @@ export default function Contact({ data }) {
               return (
                 <div key={`${index}`}>
                   <textarea
+                    name={field.field_name}
                     required={field.required === 'Yes'}
                     placeholder={field.field_name}
                   />
@@ -36,6 +37,7 @@ export default function Contact({ data }) {
               return (
                 <div key={`${index}`}>
                   <input
+                    name={field.field_name}
                     required={field.required === 'Yes'}
                     type={field.field_type}
                     placeholder={field.field_name}
