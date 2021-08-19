@@ -74,7 +74,7 @@ async function makePages({ graphql, actions }) {
   })
 }
 
-export async function createPages(params) {
+exports.createPages = async (params) => {
   // Create pages dynamically
   // Wait for all promises to be resolved before finishing this function
   await Promise.all([makePages(params)])
