@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import RichText from './RichTextCustom'
+import RichText from '../RichTextCustom'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 export default function CallToActionGrid({ title, items }) {
+  console.log(title[0].text)
   return (
-    <CallToActionGridWrapper>
+    <CallToActionGridWrapper titleText={title[0].text}>
       <RichText render={title} />
       {items.map((item, index) => (
         <CallToActionBlockWrapper key={`call-to-action-${index}`}>
@@ -33,6 +34,7 @@ export default function CallToActionGrid({ title, items }) {
 const CallToActionGridWrapper = styled.section`
   max-width: 800px;
   margin: 20px auto;
+  padding: ${props => (props.titleText === 'Features' ? `0 20px` : `0`)};
 `
 
 const CallToActionBlockWrapper = styled.div`
@@ -43,7 +45,7 @@ const CallToActionBlockWrapper = styled.div`
 
   div.call-to-action-content-image {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 `
 

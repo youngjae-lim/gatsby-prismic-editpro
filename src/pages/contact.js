@@ -79,6 +79,7 @@ export const query = graphql`
 const ContentWrapper = styled.section`
   max-width: 800px;
   margin: 86px auto;
+  padding: 0 20px;
 `
 
 const Form = styled.form`

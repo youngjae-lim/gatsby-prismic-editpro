@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import RichText from './RichTextCustom'
+import RichText from '../RichTextCustom'
 
 export default function Hero({ title, content, image }) {
   return (

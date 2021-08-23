@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import RichText from './RichTextCustom'
+import RichText from '../RichTextCustom'
 
-export default function PriceListGrid({ title, items }) {
+export default function PriceList({ title, items }) {
   return (
     <PriceListGridWrapper>
       <RichText render={title} />
@@ -31,13 +31,13 @@ export default function PriceListGrid({ title, items }) {
 const PriceListGridWrapper = styled.section`
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 20px;
 `
 const PriceListGridStyles = styled.div`
-  margin: 0 10px;
-  padding: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 20px;
 `
 
 const PriceBlockWrapper = styled.div`
@@ -46,7 +46,6 @@ const PriceBlockWrapper = styled.div`
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;
   padding: 10px;
-  margin: 0 10px;
   position: relative;
 
   .most-popular {

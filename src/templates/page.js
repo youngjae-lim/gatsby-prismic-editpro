@@ -21,4 +21,5 @@ export default function Page({ pageContext }) {
 const PageWrapper = styled.section`
   max-width: 800px;
   margin: 86px auto;
+  padding: 0 20px;
 `
